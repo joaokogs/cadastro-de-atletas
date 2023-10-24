@@ -1,0 +1,46 @@
+<%- include('../partials/header.ejs') %>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Atletas</h1>
+        <a href="/admin/novoatleta" class="btn btn-success mt-4">Cadastrar novo Atleta</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% atletas.forEach(atleta=>{ %>
+
+                    <tr>
+                        <th><%= atleta.id %></th>
+                        <th><%= atleta.nome %></th>
+                        <th>
+                            <a href="/admin/atleta/edit/<%= atleta.id %>" class="btn btn-primary">Editar</a>
+                            <form action="/atleta/deletar" method="POST" style="display: inline;" onsubmit="confirmDel(event,this)">
+                                <input type="hidden" name="id" value="<%= atleta.id %>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                            <a href="/admin/atleta/perfil/<%= atleta.id %>" class="btn btn-warning">Exibir Perfil</a>
+                        </th>
+                    </tr>
+
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<%- include('../partials/footer.ejs') %>
+<script>
+
+    function confirmDel(event, form){
+        event.preventDefault()
+        let decision = confirm("Você deseja mesmo deletar esse Atleta?");
+        if(decision){
+            form.submit();
+        } 
+    }
+
+</script>

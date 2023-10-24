@@ -1,0 +1,50 @@
+<%- include('../partials/header.ejs') %>
+<body>
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-header">
+                <h1>Atualizar de Altletas</h1>
+            </div>
+            <div class="card-body">
+                <form action="/atleta/atualizar" method="POST">
+                    <label for="nome">Digite o Novo Nome</label>
+                    <input type="text" name="nome" placeholder="Digite o Nome" class="form-control mb-4" value="<%= atleta.nome %>">
+
+                    <input type="hidden" name="id" value="<%= atleta.id %>">
+
+                    <label for="email">Digite o Novo E-mail</label>
+                    <input type="email" class="form-control mb-4" name="email" placeholder="Digite o E-mail" value="<%= atleta.email %>">
+
+                    <label for="cpf">Digite o Novo CPF</label>
+                    <input type="text" class="form-control mb-4" name="cpf" placeholder="Digite o CPF" value="<%= atleta.cpf %>">
+
+                    <label for="numcelular">Digite o Novo número de Celular</label>
+                    <input type="tel" class="form-control mb-4" name="numcelular" placeholder="Digite o número de Celular" value="<%= atleta.numcelular %>">
+
+                    <label for="dan">Graduação</label>
+                    <select name="dan" class="form-control mb-4">
+                        <% dans.forEach((dan)=>{ %>
+
+                            
+                                <% if(dan.id == atleta.danId){ %>
+                                    <option value="<%= dan.id %>" selected><%= dan.nome %></option>
+                                <% }else{ %>
+                                    <option value="<%= dan.id %>"><%= dan.nome %></option>
+                                <% } %>
+                        
+
+                        <% }) %>
+                    </select>
+
+                    <label for="nascimento">Data de Nascimento</label>
+                    <input type="date" name="nascimento" class="form-control mb-4" value="<%= atleta.nascimento %>" id="inputDate">
+
+                    <button class="btn btn-success btn-block">Atualizar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<%- include('../partials/footer.ejs') %>
